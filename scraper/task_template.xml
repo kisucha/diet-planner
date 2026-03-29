@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<!--
+  task_template.xml
+  목적: 윈도우 작업 스케줄러 등록용 XML 템플릿
+  특징: 매일 22:00 실행, 최대 6시간 허용, 이전 실행 중이면 스킵
+-->
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Description>만개의 레시피 스크래퍼 - 매일 10,000개 레시피 수집</Description>
+    <Author>DietPlanner</Author>
+  </RegistrationInfo>
+
+  <!-- 매일 오후 10시 실행 -->
+  <Triggers>
+    <CalendarTrigger>
+      <StartBoundary>2026-03-27T22:00:00</StartBoundary>
+      <Enabled>true</Enabled>
+      <ScheduleByDay>
+        <DaysInterval>1</DaysInterval>
+      </ScheduleByDay>
+    </CalendarTrigger>
+  </Triggers>
+
+  <!-- 실행 조건 -->
+  <Principals>
+    <Principal id="Author">
+      <LogonType>InteractiveToken</LogonType>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+
+  <Settings>
+    <!-- 최대 실행 시간: 6시간 -->
+    <ExecutionTimeLimit>PT6H</ExecutionTimeLimit>
+    <!-- 이미 실행 중이면 새 실행 스킵 -->
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <!-- 배터리 여부 무관 실행 -->
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <!-- 유휴 상태 무관 실행 -->
+    <IdleSettings>
+      <StopOnIdleEnd>false</StopOnIdleEnd>
+      <RestartOnIdle>false</RestartOnIdle>
+    </IdleSettings>
+    <Enabled>true</Enabled>
+    <!-- 놓친 경우 즉시 실행 -->
+    <StartWhenAvailable>true</StartWhenAvailable>
+  </Settings>
+
+  <Actions Context="Author">
+    <Exec>
+      <Command>C:\Develop\diet\scraper\run.bat</Command>
+      <WorkingDirectory>C:\Develop\diet</WorkingDirectory>
+    </Exec>
+  </Actions>
+</Task>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자동 식단 생성기</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>자동 식단 생성기</h1>
+    </header>
+
+    <main>
+        <section class="calendar-section">
+            <h2>달력 보기</h2>
+            <div id="calendar">
+                <!-- 달력이 여기에 표시됩니다 -->
+            </div>
+        </section>
+
+        <section class="meal-plan-section">
+            <h2>식단 계획</h2>
+            <div id="meal-plan-display">
+                <!-- 선택된 날짜의 식단이 여기에 표시됩니다 -->
+            </div>
+        </section>
+
+        <section class="recipe-registration">
+            <h2>레시피 등록</h2>
+            <form id="recipe-form">
+                <label for="recipe-name">메뉴 이름:</label>
+                <input type="text" id="recipe-name" name="recipeName" required>
+
+                <label for="meal-type">식사 종류:</label>
+                <select id="meal-type" name="mealType">
+                    <option value="breakfast">아침</option>
+                    <option value="lunch">점심</option>
+                    <option value="dinner">저녁</option>
+                    <option value="side">반찬</option>
+                    <option value="snack">야식</option>
+                </select>
+
+                <label for="ingredients">필요 재료:</label>
+                <textarea id="ingredients" name="ingredients" placeholder="재료와 양을 입력하세요 (예: 밥 2공기, 계란 2개)" required></textarea>
+
+                <label for="instructions">조리 방법:</label>
+                <textarea id="instructions" name="instructions" placeholder="조리 방법을 순서대로 입력하세요" required></textarea>
+
+                <button type="submit">레시피 등록</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

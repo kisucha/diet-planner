@@ -1,0 +1,24 @@
+# 의존성 패키지 (서버에서 npm install로 재설치)
+node_modules/
+scraper/node_modules/
+
+# 환경 변수 (서버에서 직접 생성)
+.env
+
+# 로그 파일
+scraper/logs/
+*.log
+logs/
+
+# 스크레이퍼 수집 이미지 (용량 큼 - git 제외)
+scraper/storage/images/
+public/images/recipes/
+
+# OS / IDE 파일
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# npm 디버그 로그
+npm-debug.log*

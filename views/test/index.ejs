@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레시피 DB 테스트</title>
+    <link rel="stylesheet" href="/css/test.css">
+</head>
+<body>
+
+<!-- 상단 헤더 -->
+<header class="header" id="top">
+    <div class="header-inner">
+        <h1 class="header-title">🍽️ 레시피 DB 확인</h1>
+        <div class="header-stats">
+            <span class="stat-badge">전체 <strong><%= stats.total %></strong>개</span>
+            <span class="stat-badge">이미지 <strong><%= stats.with_image %></strong>개</span>
+            <span class="stat-badge">자동수집 <strong><%= stats.auto_fetched %></strong>개</span>
+        </div>
+    </div>
+</header>
+
+<!-- 메인 레이아웃 -->
+<div class="layout">
+
+    <!-- 왼쪽: 카테고리 패널 -->
+    <aside class="sidebar">
+        <h2 class="sidebar-title">카테고리</h2>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="음식명 검색..." autocomplete="off">
+        </div>
+        <ul class="category-list">
+            <li class="category-item active" data-dish-type="" onclick="selectCategory(this, '', '전체')">
+                <span class="cat-label">전체</span>
+                <span class="cat-count"><%= stats.total %></span>
+            </li>
+            <% categories.forEach(cat => { %>
+            <li class="category-item" data-dish-type="<%= cat.dish_type %>" onclick="selectCategory(this, '<%= cat.dish_type %>', '<%= cat.dish_type_label %>')">
+                <span class="cat-label"><%= cat.dish_type_label %></span>
+                <span class="cat-count"><%= cat.cnt %></span>
+            </li>
+            <% }) %>
+        </ul>
+    </aside>
+
+    <!-- 중앙: 레시피 목록 -->
+    <main class="content">
+        <div class="content-header">
+            <h2 class="content-title" id="contentTitle">전체</h2>
+            <span class="content-count" id="contentCount"></span>
+        </div>
+        <div class="recipe-grid" id="recipeGrid"></div>
+        <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+            <button class="btn-load-more" id="loadMoreBtn" onclick="loadMore()">더 보기</button>
+        </div>
+        <div class="empty-msg" id="emptyMsg" style="display:none">해당 카테고리에 레시피가 없습니다.</div>
+    </main>
+
+</div>
+
+<!-- 상세 모달 -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+<div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-body" id="modalBody">
+        <div class="loading">불러오는 중...</div>
+    </div>
+</div>
+
+<!-- 맨 위로 버튼 -->
+<button class="btn-top" id="btnTop" onclick="scrollToTop()" title="맨 위로">▲</button>
+
+<script src="/js/test.js"></script>
+</body>
+</html>
